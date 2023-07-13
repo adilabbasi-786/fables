@@ -81,22 +81,19 @@ function Footer() {
               </h2>
               <ul class="nav fables-footer-links">
                 <li>
-                  <a href="about1.html">About Us</a>
+                  <a href="/about">About Us</a>
                 </li>
                 <li>
-                  <a href="contactus1.html">Contact Us</a>
+                  <a href="/contact">Contact Us</a>
                 </li>
                 <li>
-                  <a href="gallery.html">Gallery</a>
+                  <a href="/product">Products</a>
                 </li>
                 <li>
                   <a href="team.html">Team</a>
                 </li>
                 <li>
-                  <a href="blog.html">Blog</a>
-                </li>
-                <li>
-                  <a href="testimonials.html">Testimonials</a>
+                  <a href="/blog">Blog</a>
                 </li>
               </ul>
             </div>

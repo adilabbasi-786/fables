@@ -8,7 +8,7 @@ const TopHeader = () => {
           <div class="row" id="top-row">
             <div class="col-12 col-sm-3 col-lg-5">
               <a
-                href="register.html"
+                href="/signup"
                 class="top-link fables-third-text-color fables-second-hover-color font-13 px-3 d-inline-block border-left-0"
               >
                 <i class="fas fa-user-plus"></i> Register{" "}

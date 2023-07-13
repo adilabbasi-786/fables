@@ -64,26 +64,14 @@ const Header2 = () => {
                     <li class="nav-item dropdown">
                       <a
                         class="nav-link dropdown-toggle"
-                        href="#"
+                        href="/products"
                         id="sub-nav4"
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        Store
+                        Products
                       </a>
-                      <ul class="dropdown-menu" aria-labelledby="sub-nav4">
-                        <li>
-                          <a class="dropdown-item" href="store_grid_list.html">
-                            Product Category{" "}
-                          </a>
-                        </li>
-                        <li>
-                          <a class="dropdown-item" href="store_single.html">
-                            Product Single
-                          </a>
-                        </li>
-                      </ul>
                     </li>
                     <li class="nav-item dropdown">
                       <a
@@ -116,6 +104,12 @@ const Header2 = () => {
             </div>
             <div class="col-5 col-md-2 pr-md-0 icons-header-mobile">
               <div class="fables-header-icons pt-lg-4 text-right">
+                <a
+                  href="/login"
+                  class="open-search fables-third-text-color fables-mega-menu-btn px-4  fables-second-hover-color"
+                >
+                  <i class="fa-regular fa-user"></i>
+                </a>
                 <a
                   href="#"
                   class="open-search fables-third-text-color fables-mega-menu-btn px-4  fables-second-hover-color"
