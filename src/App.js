@@ -9,6 +9,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import Signup from "./pages/Signup";
 import Products from "./pages/Products";
+import Search from "./Components/Search/Search";
+import SingleProducts from "./Components/SingleProducts/SingleProducts";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/singlepro" element={<SingleProducts />} />
         </Routes>
       </BrowserRouter>
     </div>

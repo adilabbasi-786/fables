@@ -111,7 +111,7 @@ const Header2 = () => {
                   <i class="fa-regular fa-user"></i>
                 </a>
                 <a
-                  href="#"
+                  href="/search"
                   class="open-search fables-third-text-color fables-mega-menu-btn px-4  fables-second-hover-color"
                 >
                   <i class="fa-solid fa-magnifying-glass fables-iconsearch-icon"></i>

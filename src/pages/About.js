@@ -1,8 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import Teams from "../Components/Teams/Teams";
 import Footer from "../Components/Footer/Footer";
 
 function About() {
+  const [data, setData] = useState([
+    {
+      id: 1,
+      attributes: {
+        title: "We’re Creative",
+        desc: "Lorem ipsum dolor sit amet adipiscing elit. Aenean ac lorem pretium laoreet enim at.",
+        icon: "fa-lightbulb ",
+        createdAt: "2023-07-14T07:16:22.601Z",
+        updatedAt: "2023-07-14T07:17:31.283Z",
+        publishedAt: "2023-07-14T07:16:24.256Z",
+      },
+    },
+    {
+      id: 2,
+      attributes: {
+        title: "Highly Customizable",
+        desc: "Lorem ipsum dolor sit amet adipiscing elit. Aenean ac lorem pretium laoreet enim at.",
+        icon: "fa-gear",
+        createdAt: "2023-07-14T07:17:10.442Z",
+        updatedAt: "2023-07-14T07:17:11.203Z",
+        publishedAt: "2023-07-14T07:17:11.197Z",
+      },
+    },
+    {
+      id: 3,
+      attributes: {
+        title: "Efficient 24/7 support",
+        desc: "Lorem ipsum dolor sit amet adipiscing elit. Aenean ac lorem pretium laoreet enim at.",
+        icon: "fa-headset",
+        createdAt: "2023-07-14T07:18:04.708Z",
+        updatedAt: "2023-07-14T07:18:05.577Z",
+        publishedAt: "2023-07-14T07:18:05.574Z",
+      },
+    },
+  ]);
   return (
     <>
       <div class="fables-header fables-after-overlay bg-rules">
@@ -33,70 +68,30 @@ function About() {
       </div>
       <div class="container">
         <div class="row mt-4 my-md-5 overflow-hidden">
-          <div
-            class="col-12 col-md-4 mb-4 mb-md-0 wow fadeInDown"
-            data-wow-delay=".3s"
-          >
-            <div class="border p-3 p-md-4 text-center text-lg-left">
-              <div class="row">
-                <div class="col-12 col-lg-3 text-center mb-3 mb-lg-0">
-                  <i class="fa-sharp fa-regular fa-lightbulb fables-second-text-color fa-3x"></i>{" "}
-                </div>
-                <div class="col-12 col-lg-9">
-                  <h2 class="fables-second-text-color font-20 semi-font mb-3 about-block-heading">
-                    We’re Creative
-                  </h2>
-                  <div class="font-15 fables-forth-text-color">
-                    Lorem ipsum dolor sit amet adipiscing elit. Aenean ac lorem
-                    pretium laoreet enim at.
+          {data.map((item) => (
+            <div
+              class="col-12 col-md-4 mb-4 mb-md-0 wow fadeInDown"
+              data-wow-delay=".3s"
+            >
+              <div class="border p-3 p-md-4 text-center text-lg-left">
+                <div class="row">
+                  <div class="col-12 col-lg-3 text-center mb-3 mb-lg-0">
+                    <i
+                      class={`fa-regular ${item.attributes.icon} fables-second-text-color fa-3x`}
+                    ></i>
+                  </div>
+                  <div class="col-12 col-lg-9">
+                    <h2 class="fables-second-text-color font-20 semi-font mb-3 about-block-heading">
+                      {item.attributes.title}
+                    </h2>
+                    <div class="font-15 fables-forth-text-color">
+                      {item.attributes.desc}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div
-            class="col-12 col-md-4 mb-4 mb-md-0 wow fadeInDown"
-            data-wow-delay=".6s"
-          >
-            <div class="border p-3 p-md-4 text-center text-lg-left">
-              <div class="row">
-                <div class="col-12 col-lg-3 text-center mb-3 mb-lg-0">
-                  <i class="fa-sharp fa-light fa-gears fables-second-text-color fa-3x"></i>
-                </div>
-                <div class="col-12 col-lg-9">
-                  <h2 class="fables-second-text-color font-20 semi-font mb-3 about-block-heading">
-                    Highly Customizable
-                  </h2>
-                  <div class="font-15 fables-forth-text-color">
-                    Lorem ipsum dolor sit amet adipiscing elit. Aenean ac lorem
-                    pretium laoreet enim at.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="col-12 col-md-4 mb-4 mb-md-0 wow fadeInDown"
-            data-wow-delay=".9s"
-          >
-            <div class="border p-3 p-md-4 text-center text-lg-left">
-              <div class="row">
-                <div class="col-12 col-lg-3 text-center mb-3 mb-lg-0">
-                  <i class="fa-sharp fa-regular fa-headset fables-second-text-color fa-3x"></i>
-                  {/* <span class="fables-iconheadset-icon fables-second-text-color fa-3x"></span> */}
-                </div>
-                <div class="col-12 col-lg-9">
-                  <h2 class="fables-second-text-color font-20 semi-font mb-3 about-block-heading">
-                    Efficient 24/7 support
-                  </h2>
-                  <div class="font-15 fables-forth-text-color">
-                    Lorem ipsum dolor sit amet adipiscing elit. Aenean ac lorem
-                    pretium laoreet enim at.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
       <div class="fables-bussiness-section bg-rules">
