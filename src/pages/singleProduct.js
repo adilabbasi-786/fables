@@ -1,12 +1,12 @@
 import React from "react";
-import Footer from "../Footer/Footer";
-import RelatedProduct from "./RelatedProduct";
-import pro1 from "../../../src/images/single-product.jpg";
-import pro2 from "../../../src/images/product7.jpg";
-import pro3 from "../../../src/images/product8.jpg";
-import pro4 from "../../../src/images/product9.jpg";
+import Footer from "../Components/Footer/Footer";
+import RelatedProduct from "../Components/SingleProducts/RelatedProduct";
+import pro1 from "../../src//images/single-product.jpg";
+import pro2 from "../../src/images/product7.jpg";
+import pro3 from "../../src/images/product8.jpg";
+import pro4 from "../../src/images/product9.jpg";
 
-function SingleProducts() {
+function SingleProduct() {
   return (
     <>
       <div class="fables-header fables-after-overlay">
@@ -118,7 +118,8 @@ function SingleProducts() {
             <div class="row mb-5">
               <div class="col-12 col-sm-7 text-center text-md-left">
                 <span class="fables-fifth-text-color">
-                  <span class="fables-iconprice"></span> Price :
+                  <i class="fa-solid fa-tags"></i>
+                  Price :
                 </span>
                 <span class="fables-second-text-color font-20 font-weight-bold">
                   $98.00
@@ -150,7 +151,7 @@ function SingleProducts() {
                   href="#"
                   class="btn fables-second-border-color fables-second-text-color fables-btn-rouned fables-hover-btn-color font-14 px-4 py-2 semi-font"
                 >
-                  <span class="fables-iconcart"></span>
+                  <i class="fa-solid fa-cart-shopping"></i>
                   <span class="fables-btn-value">ADD TO CART</span>
                 </a>
               </div>
@@ -173,8 +174,8 @@ function SingleProducts() {
                   href="#"
                   class="btn fables-forth-background-color fables-btn-rouned fables-second-hover-background-color white-color px-2 px-md-4 py-2 font-18"
                 >
-                  <span class="fables-iconshare"></span>
                   <span class="fables-btn-value">Share on </span>
+                  <i class="fa-solid fa-share"></i>
                 </a>
               </div>
               <div class="col-6 col-sm-8 col-lg-7 col-xl-8 text-center mt-0 mt-sm-0 pl-0">
@@ -330,4 +331,4 @@ function SingleProducts() {
   );
 }
 
-export default SingleProducts;
+export default SingleProduct;

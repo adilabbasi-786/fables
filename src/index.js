@@ -7,11 +7,13 @@ import "./bootstrap4.css";
 import "./custom.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-
+import Cart from "./Context/CartContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <Cart>
+      <App />
+    </Cart>
   </React.StrictMode>
 );
 

@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import chooseus from "../../images/choose-us-index.jpg";
 
 const Services = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      let req = await fetch("http://localhost:1337/api/services");
+      let res = await req.json();
+      setData(res.data);
+    };
+    getData();
+  }, []);
   return (
     <>
-      <div class="container-fluid my-0 my-lg-5">
+      <div class="container-fluid my-0 my-lg-5" id="my-services">
         <div class="row">
           <div class="col-12 col-lg-2 p-0">
             <div class="text-center fables-main-background-color fables-sqr-rotation fables-second-border-color fables-sqr-rotation-services">
@@ -27,84 +37,28 @@ const Services = () => {
                 <div class="row">
                   <div class="col-12 col-lg-10 offset-lg-2">
                     <div class="row">
-                      <div
-                        class="col-12 col-sm-6 pb-lg-5 mt-4 mt-lg-0 wow fadeInDown"
-                        data-wow-delay=".4s"
-                      >
-                        <div class="row text-center text-md-left">
-                          <div class="col-12 col-md-3 col-xl-2 mb-3 mb-md-0">
-                            <span class="fables-iconhead-set-light fables-second-text-color font-40"></span>
-                          </div>
-                          <div class="col-12 col-md-9 pl-md-0">
-                            <h2 class="text-white font-19 semi-font mb-2">
-                              <i class="fa-solid fa-headphones"></i>
-                              <span> Free Updates & Support</span>
-                            </h2>
-                            <div class="font-14 text-white">
-                              Lorem ipsum dolor sit amet adipiscing elit. Aenean
-                              ac lorem pretium laoreet enim at.
+                      {data.map((item) => (
+                        <div
+                          class="col-12 col-sm-6 pb-lg-5 mt-4 mt-lg-0 wow fadeInDown"
+                          data-wow-delay=".4s"
+                        >
+                          <div class="row text-center text-md-left">
+                            <div class="col-12 col-md-3 col-xl-2 mb-3 mb-md-0"></div>
+                            <div class="col-12 col-md-9 pl-md-0">
+                              <h2 class="text-white font-19 semi-font mb-2">
+                                <i
+                                  class={`${item.attributes.icon} fables-second-text-color font-40`}
+                                ></i>
+                                &nbsp;
+                                <span> {item?.attributes?.title}</span>
+                              </h2>
+                              <div class="font-14 text-white">
+                                {item.attributes.desc}
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div
-                        class="col-12 col-sm-6 pb-lg-5 mt-4 mt-lg-0 wow fadeInDown"
-                        data-wow-delay=".8s"
-                      >
-                        <div class="row text-center text-md-left">
-                          <div class="col-12 col-md-3 col-xl-2 mb-3 mb-md-0">
-                            <span class="fables-iconscreen fables-second-text-color font-40"></span>
-                          </div>
-                          <div class="col-12 col-md-9 pl-md-0">
-                            <h2 class="text-white font-19 semi-font mb-2">
-                              <i class="fa-thin fa-screencast"></i>
-                              <span>Highly Customizable</span>
-                            </h2>
-                            <div class="font-14 text-white">
-                              Lorem ipsum dolor sit amet adipiscing elit. Aenean
-                              ac lorem pretium laoreet enim at.
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        class="col-12 col-sm-6 pb-lg-5 mt-4 mt-lg-0 wow fadeInDown"
-                        data-wow-delay="1.2s"
-                      >
-                        <div class="row text-center text-md-left">
-                          <div class="col-12 col-md-3 col-xl-2 mb-3 mb-md-0">
-                            <span class="fables-iconfile fables-second-text-color font-40"></span>
-                          </div>
-                          <div class="col-12 col-md-9 pl-md-0">
-                            <h2 class="text-white font-19 semi-font mb-2">
-                              Drag & Drop Page Builder
-                            </h2>
-                            <div class="font-14 text-white">
-                              Lorem ipsum dolor sit amet adipiscing elit. Aenean
-                              ac lorem pretium laoreet enim at.
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        class="col-12 col-sm-6 pb-lg-5 mt-4 mt-lg-0 wow fadeInDown"
-                        data-wow-delay="1.6s"
-                      >
-                        <div class="row text-center text-md-left">
-                          <div class="col-12 col-md-3 col-xl-2 mb-3 mb-md-0">
-                            <span class="fables-iconhead-set-light fables-second-text-color font-40"></span>
-                          </div>
-                          <div class="col-12 col-md-9 pl-md-0">
-                            <h2 class="text-white font-19 semi-font mb-2">
-                              Free Updates & Support
-                            </h2>
-                            <div class="font-14 text-white">
-                              Lorem ipsum dolor sit amet adipiscing elit. Aenean
-                              ac lorem pretium laoreet enim at.
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      ))}
                     </div>
                   </div>
                 </div>

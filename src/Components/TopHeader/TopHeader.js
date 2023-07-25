@@ -13,22 +13,23 @@ const TopHeader = () => {
               >
                 <i class="fas fa-user-plus"></i> Register{" "}
               </a>
-              <a
+              {/* <a
                 href="#search"
                 class="fables-third-text-color fables-second-hover-color px-3 d-inline-block border-left-0"
               >
                 <span class="fables-iconsearch-icon"></span>
-              </a>
+              </a> */}
             </div>
             <div class="col-12 col-sm-5 col-lg-4 text-left text-lg-right">
               <p class="fables-third-text-color font-13">
-                <span class="fables-iconphone"></span> Phone : (888) 6000 6000 -
-                (888) 6000 6000
+                <i class="fa-solid fa-phone"></i>
+                &nbsp;Phone : (888) 6000 6000 - (888) 6000 6000
               </p>
             </div>
             <div class="col-12 col-sm-4 col-lg-3 text-left text-lg-right">
               <p class="fables-third-text-color font-13">
-                <span class="fables-iconemail"></span> Email: Design@domain.com
+                <i class="fa-solid fa-envelope"></i>&nbsp; Email:
+                Design@domain.com
               </p>
             </div>
           </div>
