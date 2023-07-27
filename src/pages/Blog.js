@@ -6,6 +6,7 @@ import blog3 from "../../src/images/blog-cat3.jpg";
 import blog4 from "../../src/images/blog-cat4.jpg";
 import blog5 from "../../src/images/blog-cat5.jpg";
 import blog6 from "../../src/images/blog-cat6.jpg";
+import { Link } from "react-router-dom";
 
 function Blog() {
   const [data, setDAta] = useState([]);
@@ -33,50 +34,52 @@ function Blog() {
               <div
                 class="mb-4 mb-lg-5 wow fadeIn"
                 data-wow-delay=".3s"
-                value={item.id}
+                key={item.id}
               >
-                <div class="row">
-                  <div class="col-12 col-sm-5">
-                    <div class="image-container zoomIn-effect">
-                      <a href="#">
-                        <img
-                          src={`http://localhost:1337${item.attributes.img.data.attributes.url}`}
-                          alt="image alt text"
-                        />
-                      </a>
+                <Link to={`/singleBlogPage/${item.id}`}>
+                  <div class="row">
+                    <div class="col-12 col-sm-5">
+                      <div class="image-container zoomIn-effect">
+                        <a href="#">
+                          <img
+                            src={`http://localhost:1337${item?.attributes?.img?.data[0]?.attributes?.url}`}
+                            alt="image alt text"
+                          />
+                        </a>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-12 col-sm-7">
-                    <h2 class="font-18 semi-font mt-3 mt-sm-0 mb-2">
-                      <a
-                        href="#"
-                        class="fables-main-text-color fables-second-hover-color"
-                      >
-                        {item.attributes.title}
-                      </a>
-                    </h2>
-                    <div class="fables-forth-text-color font-14 my-2">
-                      <span class="fables-icondata fables-second-text-color mr-1"></span>
-                      <span class="mr-3"> 09 November, 2018 </span>
-                      <span class="fables-iconcomment fables-second-text-color mr-1"></span>
+                    <div class="col-12 col-sm-7">
+                      <h2 class="font-18 semi-font mt-3 mt-sm-0 mb-2">
+                        <a
+                          href="#"
+                          class="fables-main-text-color fables-second-hover-color"
+                        >
+                          {item?.attributes?.title}
+                        </a>
+                      </h2>
+                      <div class="fables-forth-text-color font-14 my-2">
+                        <span class="fables-icondata fables-second-text-color mr-1"></span>
+                        <span class="mr-3"> 09 November, 2018 </span>
+                        <span class="fables-iconcomment fables-second-text-color mr-1"></span>
+                        <a
+                          href=""
+                          class="fables-forth-text-color fables-second-hover-color position-relative z-index"
+                        >
+                          {item.id}
+                        </a>
+                      </div>
+                      <p class="fables-forth-text-color font-14 mb-3">
+                        {item?.attributes?.desc}
+                      </p>
                       <a
                         href=""
-                        class="fables-forth-text-color fables-second-hover-color position-relative z-index"
+                        class="btn fables-second-text-color underline fables-main-hover-text-color p-0 fables-main-hover-color"
                       >
-                        {item.id}
+                        Read More
                       </a>
                     </div>
-                    <p class="fables-forth-text-color font-14 mb-3">
-                      {item.attributes.desc}
-                    </p>
-                    <a
-                      href=""
-                      class="btn fables-second-text-color underline fables-main-hover-text-color p-0 fables-main-hover-color"
-                    >
-                      Read More
-                    </a>
                   </div>
-                </div>
+                </Link>
               </div>
             ))}
           </div>

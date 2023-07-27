@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "../Components/Footer/Footer";
 import RelatedProduct from "../Components/SingleProducts/RelatedProduct";
-import pro1 from "../../src//images/single-product.jpg";
-import pro2 from "../../src/images/product7.jpg";
-import pro3 from "../../src/images/product8.jpg";
-import pro4 from "../../src/images/product9.jpg";
 
-function SingleProduct() {
+import pro4 from "../../src/images/product9.jpg";
+import { useParams } from "react-router-dom";
+
+function SingleProduct(item) {
+  const [count, setCount] = useState(1);
+  const [active, setActive] = useState("DESCRIPTION");
+
+  const { id } = useParams();
+  console.log(id);
+  const [data, setData] = useState({});
+  useEffect(() => {
+    const getData = async () => {
+      let req = await fetch(
+        `http://localhost:1337/api/products/${id}?populate=*`
+      );
+      let res = await req.json();
+      setData(res.data);
+    };
+    getData();
+  }, []);
+  // console.log(active);
   return (
     <>
       <div class="fables-header fables-after-overlay">
@@ -33,20 +49,32 @@ function SingleProduct() {
         </div>
       </div>
       <div class="container">
-        <div class="row my-4 my-md-5">
+        <div class="row my-4 my-md-5" key={item.id}>
           <div class="col-12 col-lg-6">
             <div class="fables-single-slider store-single-slider">
               <div id="sync1" class="owl-carousel owl-theme">
                 <div class="item">
-                  <img src={pro1} alt="" class="w-100" />
+                  <img
+                    src={`http://localhost:1337${data?.attributes?.img?.data[0]?.attributes?.url}`}
+                    alt=""
+                    class="w-100"
+                  />
                 </div>
               </div>
               <div id="sync2" class="owl-carousel owl-theme">
                 <div class="item">
-                  <img src={pro2} alt="" class="w-100" />
+                  <img
+                    src={`http://localhost:1337${data?.attributes?.img?.data[1]?.attributes?.url}`}
+                    alt=""
+                    class="w-100"
+                  />
                 </div>
                 <div class="item">
-                  <img src={pro3} alt="" class="w-100" />
+                  <img
+                    src={`http://localhost:1337${data?.attributes?.img?.data[2]?.attributes?.url}`}
+                    alt=""
+                    class="w-100"
+                  />
                 </div>
                 <div class="item">
                   <img src={pro4} alt="" class="w-100" />
@@ -56,7 +84,7 @@ function SingleProduct() {
           </div>
           <div class="col-12 col-lg-6 col-12 col-lg-6 mt-3 mt-lg-0">
             <h2 class="fables-main-text-color font-20 semi-font">
-              LUIS LEATHER DRIVING MOCCASINS FROM DOUBLE OAK MILLS
+              {data?.attributes?.title}
             </h2>
 
             <div class="fables-forth-text-color fables-single-tags mt-3">
@@ -66,8 +94,7 @@ function SingleProduct() {
             </div>
 
             <p class="fables-forth-text-color font-15 my-3">
-              Fashion was originally established as a source of exclusive
-              designer clothing at affordable prices.
+              {data?.attributes?.desc}
             </p>
 
             <div class="row mb-5">
@@ -122,23 +149,33 @@ function SingleProduct() {
                   Price :
                 </span>
                 <span class="fables-second-text-color font-20 font-weight-bold">
-                  $98.00
+                  {data?.attributes?.price}
                 </span>
               </div>
               <div class="col-9 col-md-4 col-lg-5 mt-3 mt-sm-0 mr-auto ml-auto mr-md-0 ml-md-auto">
                 <div class="fables-calc fables-light-background-color fables-btn-rouned">
-                  <span class="calc-btn minus fables-forth-text-color float-left calc-width mt-2">
-                    -
-                  </span>
-                  <span class="calc-width">
+                  <div>
+                    <span
+                      onClick={() =>
+                        setCount((prev) => (prev == 1 ? 1 : prev - 1))
+                      }
+                      class="calc-btn minus fables-forth-text-color float-left calc-width mt-2"
+                      id="decrement"
+                    >
+                      -
+                    </span>
+                  </div>
+                  <span class="calc-width" id="total_count">
                     <input
                       type="text"
-                      id="input-val"
-                      value={1}
+                      value={count}
                       class="form-control d-inline-block border text-center form-circle-input rounded-circle"
                     />
                   </span>
-                  <span class="calc-btn plus fables-forth-text-color float-right calc-width mt-2">
+                  <span
+                    class="calc-btn plus fables-forth-text-color float-right calc-width mt-2"
+                    onClick={() => setCount((prev) => prev + 1)}
+                  >
                     +
                   </span>
                 </div>
@@ -221,106 +258,99 @@ function SingleProduct() {
             </div>
           </div>
         </div>
+
         <div class="row">
           <div class="col-12">
             <nav class="fables-single-nav">
               <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a
-                  class="fables-single-item nav-link fables-forth-text-color fables-second-active fables-second-hover-color fables-forth-after px-3 px-md-5 font-15 semi-font border-0 active rounded-0 py-3"
-                  id="nav-desc-tab"
+                  class={`fables-single-item nav-link fables-forth-text-color fables-second-active
+                  fables-second-hover-color fables-forth-after px-3 px-md-5 font-15 semi-font border-0 ${
+                    active === "DESCRIPTION" ? "active show" : ""
+                  } active rounded-0 py-3`}
                   data-toggle="tab"
-                  href="#nav-desc"
                   role="tab"
                   aria-controls="nav-desc"
-                  aria-selected="true"
+                  aria-selected={active === "DESCRIPTION" ? "true" : "false"}
+                  onClick={() => setActive("DESCRIPTION")}
                 >
                   DESCRIPTION
                 </a>
                 <a
-                  class="fables-single-item nav-link fables-forth-text-color fables-second-active fables-second-hover-color fables-forth-after border-0 px-3 px-md-5 font-15 semi-font rounded-0 py-3"
-                  id="nav-info-tab"
+                  class={`fables-single-item nav-link fables-forth-text-color fables-second-active
+                  fables-second-hover-color fables-forth-after border-0 px-3 px-md-5 font-15 semi-font rounded-0 py-3 ${
+                    active === "ADDITIONAL" ? "active show" : ""
+                  }  `}
                   data-toggle="tab"
-                  href="#nav-info"
                   role="tab"
                   aria-controls="nav-info"
-                  aria-selected="false"
+                  aria-selected={active === "ADDITIONAL" ? "true" : "false"}
+                  onClick={() => setActive("ADDITIONAL")}
                 >
                   ADDITIONAL INFORMATION
                 </a>
                 <a
-                  class="fables-single-item nav-link fables-forth-text-color fables-second-active fables-second-hover-color fables-forth-after border-0 px-3 px-md-5 font-15 semi-font rounded-0 py-3"
-                  id="nav-review-tab"
+                  class={`fables-single-item nav-link fables-forth-text-color fables-second-active
+                   fables-second-hover-color fables-forth-after border-0 px-3 px-md-5 font-15 semi-font rounded-0 py-3 ${
+                     active === "REVIEWS" ? "active show" : ""
+                   }`}
                   data-toggle="tab"
-                  href="#nav-review"
                   role="tab"
                   aria-controls="nav-review"
-                  aria-selected="false"
+                  aria-selected={active === "REVIEWS" ? "true" : "false"}
+                  onClick={() => setActive("REVIEWS")}
                 >
                   REVIEWS (0)
                 </a>
               </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
-              <div
-                class="tab-pane fade show active"
-                id="nav-desc"
-                role="tabpanel"
-                aria-labelledby="nav-desc-tab"
-              >
-                <p class="fables-single-info mt-4 font-15 fables-fifth-text-color">
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
-                  The point of using Lorem Ipsum is that it has a more-or-less
-                  normal distribution of letters, as opposed to using 'Content
-                  here, content here', making it look like readable English.
-                  Many desktop publishing packages and web page editors now use
-                  Lorem Ipsum as their default model text, and a search for
-                  'lorem ipsum' will uncover many web sites still in their
-                  infancy. Various versions have evolved over the years,
-                  sometimes by accident, sometimes on purpose (injected humour
-                  and the like).
-                </p>
-              </div>
-              <div
-                class="tab-pane fade"
-                id="nav-info"
-                role="tabpanel"
-                aria-labelledby="nav-info-tab"
-              >
-                <p class="fables-single-info mt-4 font-15 fables-fifth-text-color">
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
-                  The point of using Lorem Ipsum is that it has a more-or-less
-                  normal distribution of letters, as opposed to using 'Content
-                  here, content here', making it look like readable English.
-                  Many desktop publishing packages and web page editors now use
-                  Lorem Ipsum as their default model text, and a search for
-                  'lorem ipsum' will uncover many web sites still in their
-                  infancy. Various versions have evolved over the years,
-                  sometimes by accident, sometimes on purpose (injected humour
-                  and the like).
-                </p>
-              </div>
-              <div
-                class="tab-pane fade"
-                id="nav-review"
-                role="tabpanel"
-                aria-labelledby="nav-review-tab"
-              >
-                <p class="fables-single-info mt-4 font-15 fables-fifth-text-color">
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
-                  The point of using Lorem Ipsum is that it has a more-or-less
-                  normal distribution of letters, as opposed to using 'Content
-                  here, content here', making it look like readable English.
-                  Many desktop publishing packages and web page editors now use
-                  Lorem Ipsum as their default model text, and a search for
-                  'lorem ipsum' will uncover many web sites still in their
-                  infancy. Various versions have evolved over the years,
-                  sometimes by accident, sometimes on purpose (injected humour
-                  and the like).
-                </p>
-              </div>
+              {active === "DESCRIPTION" && (
+                <div
+                  class="tab-pane fade show active"
+                  id="nav-desc"
+                  role="tabpanel"
+                  aria-labelledby="nav-desc-tab"
+                >
+                  <p class="fables-single-info mt-4 font-15 fables-fifth-text-color">
+                    {data?.attributes?.desc}
+                  </p>
+                </div>
+              )}
+              {active === "ADDITIONAL" && (
+                <div
+                  class="tab-pane fade"
+                  id="nav-info"
+                  role="tabpanel"
+                  aria-labelledby="nav-info-tab"
+                >
+                  <p class="fables-single-info mt-4 font-15 fables-fifth-text-color">
+                    {data?.attributes?.addtional_desc}
+                  </p>
+                </div>
+              )}
+              {active === "REVIEWS" && (
+                <div
+                  class="tab-pane fade"
+                  id="nav-review"
+                  role="tabpanel"
+                  aria-labelledby="nav-review-tab"
+                >
+                  <p class="fables-single-info mt-4 font-15 fables-fifth-text-color">
+                    It is a long established fact that a reader will be
+                    distracted by the readable content of a page when looking at
+                    its layout. The point of using Lorem Ipsum is that it has a
+                    more-or-less normal distribution of letters, as opposed to
+                    using 'Content here, content here', making it look like
+                    readable English. Many desktop publishing packages and web
+                    page editors now use Lorem Ipsum as their default model
+                    text, and a search for 'lorem ipsum' will uncover many web
+                    sites still in their infancy. Various versions have evolved
+                    over the years, sometimes by accident, sometimes on purpose
+                    (injected humour and the like).
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>

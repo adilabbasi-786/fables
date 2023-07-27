@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import indexpro from "../../images/index-products-overlay.jpg";
-import pro1 from "../../images/index-product1.jpg";
-import pro2 from "../../images/index-product2.jpg";
+
+import { Link } from "react-router-dom";
 
 function Products() {
   const [data, setData] = useState([]);
@@ -15,6 +15,7 @@ function Products() {
     };
     getData();
   }, []);
+
   return (
     <>
       <div class="container-fluid my-4 my-md-5">
@@ -47,67 +48,66 @@ function Products() {
                         <div
                           class="card rounded-0 border-light wow fadeIn mb-4 mb-lg-0"
                           data-wow-delay=".4s"
-                          style={{ margin: "6px" }}
+                          style={{ margin: "6px", cursor: "pointer" }}
                         >
-                          <div class="row">
-                            <div class="fables-product-img col-12">
-                              <img
-                                class="card-img-top rounded-0 w-100"
-                                src={`http://localhost:1337${item?.attributes?.img?.data.attributes.url}`}
-                                // src={
-                                //   "http://localhost:1337/uploads/product1_9a1cf709eb.jpg"
-                                // }
-                                alt="dress fashion"
-                              />
-                              <div class="fables-img-overlay">
-                                <ul class="nav fables-product-btns  pr-3 mt-5 vertical-store-btns">
-                                  <li>
-                                    <a href="" class="fables-product-btn">
-                                      <i class="fa-solid fa-eye"></i>
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="" class="fables-product-btn">
-                                      <i class="fa-solid fa-code-compare"></i>
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <button class="fables-product-btn">
-                                      <i class="fa-solid fa-heart"></i>
-                                    </button>
-                                  </li>
-                                </ul>
+                          <Link to={`/singleProduct/${item.id}`}>
+                            <div class="row">
+                              <div class="fables-product-img col-12">
+                                <img
+                                  class="card-img-top rounded-0 w-100"
+                                  src={`http://localhost:1337${item.attributes.img.data[0].attributes.url}`}
+                                  alt="dress fashion"
+                                />
+                                <div class="fables-img-overlay">
+                                  <ul class="nav fables-product-btns  pr-3 mt-5 vertical-store-btns">
+                                    <li>
+                                      <a href="" class="fables-product-btn">
+                                        <i class="fa-solid fa-eye"></i>
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <a href="" class="fables-product-btn">
+                                        <i class="fa-solid fa-code-compare"></i>
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <button class="fables-product-btn">
+                                        <i class="fa-solid fa-heart"></i>
+                                      </button>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="card-body col-12">
+                                <h5 class="card-title mx-3">
+                                  <a
+                                    href="#"
+                                    class="fables-main-text-color fables-store-product-title fables-second-hover-color"
+                                  >
+                                    {item?.attributes?.title}
+                                  </a>
+                                </h5>
+                                <p class="card-text fables-fifth-text-color fables-store-product-details mx-3 store-card-text">
+                                  {item?.attributes?.desc}
+                                </p>
+                                <p class="fables-product-price fables-second-text-color my-2 mx-3 semi-font">
+                                  $ {item?.attributes?.price}
+                                </p>
+                                <p class="fables-product-info my-2">
+                                  <a
+                                    href="#"
+                                    class="btn fables-second-border-color fables-second-text-color fables-btn-rouned fables-hover-btn-color font-15"
+                                  >
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                    <tab />
+                                    <span class="fables-btn-value">
+                                      ADD TO CART
+                                    </span>
+                                  </a>
+                                </p>
                               </div>
                             </div>
-                            <div class="card-body col-12">
-                              <h5 class="card-title mx-3">
-                                <a
-                                  href="#"
-                                  class="fables-main-text-color fables-store-product-title fables-second-hover-color"
-                                >
-                                  {item?.attributes?.title}
-                                </a>
-                              </h5>
-                              <p class="card-text fables-fifth-text-color fables-store-product-details mx-3 store-card-text">
-                                {item?.attributes?.desc}
-                              </p>
-                              <p class="fables-product-price fables-second-text-color my-2 mx-3 semi-font">
-                                $ {item?.attributes?.price}
-                              </p>
-                              <p class="fables-product-info my-2">
-                                <a
-                                  href="#"
-                                  class="btn fables-second-border-color fables-second-text-color fables-btn-rouned fables-hover-btn-color font-15"
-                                >
-                                  <i class="fa-solid fa-cart-shopping"></i>
-                                  <tab />
-                                  <span class="fables-btn-value">
-                                    ADD TO CART
-                                  </span>
-                                </a>
-                              </p>
-                            </div>
-                          </div>
+                          </Link>
                         </div>
                       ))}
                     </div>

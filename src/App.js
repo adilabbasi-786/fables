@@ -11,6 +11,7 @@ import Signup from "./pages/Signup";
 import Products from "./pages/Products";
 import Search from "./Components/Search/Search";
 import SingleProduct from "./pages/singleProduct";
+import SingleBlogPage from "./Components/SingleBlogPage/SingleBlogPage";
 
 function App() {
   return (
@@ -28,7 +29,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/products" element={<Products />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/singleProduct" element={<SingleProduct />} />
+          <Route path="/singleProduct/:id" element={<SingleProduct />} />
+          <Route path="/singleBlogPage/:id" element={<SingleBlogPage />} />
         </Routes>
       </BrowserRouter>
     </div>

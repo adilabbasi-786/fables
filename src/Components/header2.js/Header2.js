@@ -108,14 +108,12 @@ const Header2 = () => {
                   class="open-search fables-third-text-color right  top-header-link px-3 px-md-2 px-lg-4 fables-second-hover-color border-0 max-line-height"
                 >
                   <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
-                  {/* <span class="fables-iconsearch-icon"></span> */}
                 </a>
                 <a
                   href="/login"
                   class="fables-third-text-color fables-second-hover-color font-13 top-header-link px-3 px-md-2 px-lg-4 max-line-height"
                 >
                   <i class="fa-solid fa-user"></i>
-                  {/* <span class="fables-iconuser"></span> */}
                 </a>
               </div>
             </div>

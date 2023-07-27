@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import magazine from "../../images/magazine-2559842.jpg";
+import { Link } from "react-router-dom";
 
 function Blogs() {
   const [data, setData] = useState([]);
@@ -27,14 +28,16 @@ function Blogs() {
               class="col-12 col-md-4 mb-4 mb-md-5 wow fadeIn"
               data-wow-delay=".6s"
             >
-              <div class="image-container zoomIn-effect">
-                <a href="#">
-                  <img
-                    src={`http://localhost:1337${item.attributes.img.data.attributes.url}`}
-                    alt=""
-                  />
-                </a>
-              </div>
+              <Link to={`/singleBlogPage/${item.id}`}>
+                <div class="image-container zoomIn-effect">
+                  <a href="#">
+                    <img
+                      src={`http://localhost:1337${item.attributes.img.data[0].attributes.url}`}
+                      alt=""
+                    />
+                  </a>
+                </div>
+              </Link>
 
               <div class="above-date py-2 py-lg-3 fables-fifth-text-color float-left w-100 d-md-none d-lg-block">
                 <div class="float-left font-13">
