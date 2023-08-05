@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Footer from "../Components/Footer/Footer";
 import RelatedProduct from "../Components/SingleProducts/RelatedProduct";
 
 import pro4 from "../../src/images/product9.jpg";
 import { useParams } from "react-router-dom";
+import { Context } from "../Context/CartContext";
 
 function SingleProduct(item) {
-  const [count, setCount] = useState(1);
+  const { handleAddToCart } = useContext(Context);
+  const [quantity, setQuantity] = useState(1);
   const [active, setActive] = useState("DESCRIPTION");
 
   const { id } = useParams();
-  console.log(id);
   const [data, setData] = useState({});
   useEffect(() => {
     const getData = async () => {
@@ -149,7 +150,7 @@ function SingleProduct(item) {
                   Price :
                 </span>
                 <span class="fables-second-text-color font-20 font-weight-bold">
-                  {data?.attributes?.price}
+                  {data?.attributes?.price} RS
                 </span>
               </div>
               <div class="col-9 col-md-4 col-lg-5 mt-3 mt-sm-0 mr-auto ml-auto mr-md-0 ml-md-auto">
@@ -157,7 +158,7 @@ function SingleProduct(item) {
                   <div>
                     <span
                       onClick={() =>
-                        setCount((prev) => (prev == 1 ? 1 : prev - 1))
+                        setQuantity((prev) => (prev == 1 ? 1 : prev - 1))
                       }
                       class="calc-btn minus fables-forth-text-color float-left calc-width mt-2"
                       id="decrement"
@@ -168,13 +169,13 @@ function SingleProduct(item) {
                   <span class="calc-width" id="total_count">
                     <input
                       type="text"
-                      value={count}
+                      value={quantity}
                       class="form-control d-inline-block border text-center form-circle-input rounded-circle"
                     />
                   </span>
                   <span
                     class="calc-btn plus fables-forth-text-color float-right calc-width mt-2"
-                    onClick={() => setCount((prev) => prev + 1)}
+                    onClick={() => setQuantity((prev) => prev + 1)}
                   >
                     +
                   </span>
@@ -189,7 +190,17 @@ function SingleProduct(item) {
                   class="btn fables-second-border-color fables-second-text-color fables-btn-rouned fables-hover-btn-color font-14 px-4 py-2 semi-font"
                 >
                   <i class="fa-solid fa-cart-shopping"></i>
-                  <span class="fables-btn-value">ADD TO CART</span>
+                  <span
+                    class="fables-btn-value"
+                    onClick={() => {
+                      console.log(data);
+                      handleAddToCart(data, quantity);
+
+                      setQuantity(1);
+                    }}
+                  >
+                    ADD TO CART
+                  </span>
                 </a>
               </div>
               <div class="col-6 text-right">
@@ -265,14 +276,15 @@ function SingleProduct(item) {
               <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a
                   class={`fables-single-item nav-link fables-forth-text-color fables-second-active
-                  fables-second-hover-color fables-forth-after px-3 px-md-5 font-15 semi-font border-0 ${
+                  fables-second-hover-color fables-forth-after border-0 px-3 px-md-5 font-15 semi-font rounded-0 py-3 ${
                     active === "DESCRIPTION" ? "active show" : ""
-                  } active rounded-0 py-3`}
+                  }  `}
                   data-toggle="tab"
                   role="tab"
-                  aria-controls="nav-desc"
-                  aria-selected={active === "DESCRIPTION" ? "true" : "false"}
+                  aria-controls="nav-info"
+                  // aria-selected={active === "ADDITIONAL" ? "true" : "false"}
                   onClick={() => setActive("DESCRIPTION")}
+                  style={{ cursor: "pointer" }}
                 >
                   DESCRIPTION
                 </a>
@@ -284,8 +296,9 @@ function SingleProduct(item) {
                   data-toggle="tab"
                   role="tab"
                   aria-controls="nav-info"
-                  aria-selected={active === "ADDITIONAL" ? "true" : "false"}
+                  // aria-selected={active === "ADDITIONAL" ? "true" : "false"}
                   onClick={() => setActive("ADDITIONAL")}
+                  style={{ cursor: "pointer" }}
                 >
                   ADDITIONAL INFORMATION
                 </a>
@@ -297,8 +310,9 @@ function SingleProduct(item) {
                   data-toggle="tab"
                   role="tab"
                   aria-controls="nav-review"
-                  aria-selected={active === "REVIEWS" ? "true" : "false"}
+                  // aria-selected={active === "REVIEWS" ? "true" : "false"}
                   onClick={() => setActive("REVIEWS")}
+                  style={{ cursor: "pointer" }}
                 >
                   REVIEWS (0)
                 </a>
@@ -307,7 +321,9 @@ function SingleProduct(item) {
             <div class="tab-content" id="nav-tabContent">
               {active === "DESCRIPTION" && (
                 <div
-                  class="tab-pane fade show active"
+                  class={`tab-pane fade ${
+                    active === "DESCRIPTION" ? "active show" : ""
+                  }`}
                   id="nav-desc"
                   role="tabpanel"
                   aria-labelledby="nav-desc-tab"
@@ -319,19 +335,24 @@ function SingleProduct(item) {
               )}
               {active === "ADDITIONAL" && (
                 <div
-                  class="tab-pane fade"
+                  class={`tab-pane fade ${
+                    active === "ADDITIONAL" ? "active show" : ""
+                  }`}
                   id="nav-info"
                   role="tabpanel"
                   aria-labelledby="nav-info-tab"
                 >
                   <p class="fables-single-info mt-4 font-15 fables-fifth-text-color">
                     {data?.attributes?.addtional_desc}
+                    {console.log(data.attributes)}
                   </p>
                 </div>
               )}
               {active === "REVIEWS" && (
                 <div
-                  class="tab-pane fade"
+                  class={`tab-pane fade ${
+                    active === "REVIEWS" ? "active show" : ""
+                  }`}
                   id="nav-review"
                   role="tabpanel"
                   aria-labelledby="nav-review-tab"
@@ -339,15 +360,7 @@ function SingleProduct(item) {
                   <p class="fables-single-info mt-4 font-15 fables-fifth-text-color">
                     It is a long established fact that a reader will be
                     distracted by the readable content of a page when looking at
-                    its layout. The point of using Lorem Ipsum is that it has a
-                    more-or-less normal distribution of letters, as opposed to
-                    using 'Content here, content here', making it look like
-                    readable English. Many desktop publishing packages and web
-                    page editors now use Lorem Ipsum as their default model
-                    text, and a search for 'lorem ipsum' will uncover many web
-                    sites still in their infancy. Various versions have evolved
-                    over the years, sometimes by accident, sometimes on purpose
-                    (injected humour and the like).
+                    its layout.
                   </p>
                 </div>
               )}

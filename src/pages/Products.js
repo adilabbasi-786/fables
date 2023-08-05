@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import Footer from "../Components/Footer/Footer";
 import { FormControl } from "react-bootstrap";
-import Filters from "../Components/Filters";
+// import Filters from "../Components/Filters";
 import ProductCategory from "../Components/ProductCategory";
 import TopRatedProduct from "../Components/TopRatedProduct";
 import { Link, useNavigate } from "react-router-dom";
@@ -56,7 +56,7 @@ function Products(item) {
                 />
               </div>
             </div>
-            <Filters />
+            {/* <Filters /> */}
 
             <ProductCategory />
             <TopRatedProduct />

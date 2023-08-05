@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import team2 from "../../images/team2-1.jpg";
-import team22 from "../../images/team2-2.jpg";
-import team21 from "../../images/team2-1.jpg";
 
 function Teams() {
   const [data, setData] = useState([]);
@@ -34,7 +31,7 @@ function Teams() {
                     <a href="#">
                       <img
                         class="w-100"
-                        src={`http://localhost:1337${item.attributes.img.data.attributes.url}`}
+                        src={`http://localhost:1337${item?.attributes?.img?.data?.attributes?.url}`}
                         alt="Fables Template"
                       />
                     </a>
@@ -49,7 +46,7 @@ function Teams() {
                       </a>
                     </h5>
                     <p class="font-13 fables-fifth-text-color italic my-2">
-                      {item.attributes.designation}
+                      {item?.attributes?.designation}
                     </p>
                     <ul class="nav fables-team-social-links">
                       <li>

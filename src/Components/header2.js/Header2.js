@@ -1,13 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import "./Header.css";
 import fableslogo from "../../images/fables-logo.png";
 import { NavLink, Link } from "react-router-dom";
 import Cart from "../Cart";
+import Search from "../Search/Search";
 const Header2 = () => {
+  const [scrolled, setScrolled] = useState(false);
   const [show, setShow] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
+  const handleScroll = () => {
+    const offSet = window.scrollY;
+    if (offSet > 200) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
-      <div class="fables-navigation fables-main-background-color py-3 py-lg-0">
+      <div
+        class={`fables-navigation fables-main-background-color py-3 py-lg-0 ${
+          scrolled ? "sticky-header" : ""
+        }`}
+        style={{ zIndex: "999" }}
+      >
         <div class="container">
           <div class="row">
             <div class="col-12 col-md-10 col-lg-9 pr-md-0">
@@ -37,65 +57,74 @@ const Header2 = () => {
                   style={show ? { display: "block" } : { display: "none" }}
                 >
                   <ul class="navbar-nav mx-auto fables-nav">
-                    <li class="nav-item dropdown">
-                      <a
-                        class="nav-link dropdown-toggle"
-                        href="/"
-                        id="sub-nav1"
-                      >
-                        Home
-                      </a>
-                    </li>
+                    <Link to={"/"}>
+                      <li class="nav-item dropdown">
+                        <a
+                          class="nav-link dropdown-toggle"
+                          href="#"
+                          id="sub-nav1"
+                        >
+                          Home
+                        </a>
+                      </li>
+                    </Link>
+                    <Link to={"/about"}>
+                      <li class="nav-item dropdown">
+                        <a
+                          class="nav-link dropdown-toggle"
+                          href="#"
+                          id="sub-nav3"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          About
+                        </a>
+                      </li>
+                    </Link>
+                    <Link to={"/products"}>
+                      <li class="nav-item dropdown">
+                        <a
+                          class="nav-link dropdown-toggle"
+                          href="#"
+                          id="sub-nav4"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          Products
+                        </a>
+                      </li>
+                    </Link>
+                    <Link to={"/blog"}>
+                      <li class="nav-item dropdown">
+                        <a
+                          class="nav-link dropdown-toggle"
+                          href="/blog"
+                          id="sub-nav5"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          Blog
+                        </a>
+                      </li>
+                    </Link>
 
-                    <li class="nav-item dropdown">
-                      <a
-                        class="nav-link dropdown-toggle"
-                        href="/about"
-                        id="sub-nav3"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        About
-                      </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a
-                        class="nav-link dropdown-toggle"
-                        href="/products"
-                        id="sub-nav4"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        Products
-                      </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a
-                        class="nav-link dropdown-toggle"
-                        href="/blog"
-                        id="sub-nav5"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        Blog
-                      </a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                      <a
-                        class="nav-link dropdown-toggle"
-                        href="/contact"
-                        id="sub-nav7"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        Contact Us
-                      </a>
-                    </li>
+                    <Link to={"/contact"}>
+                      <li class="nav-item dropdown">
+                        <a
+                          class="nav-link dropdown-toggle"
+                          href="/contact"
+                          id="sub-nav7"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          Contact Us
+                        </a>
+                      </li>
+                    </Link>
                   </ul>
                 </div>
               </nav>
@@ -107,19 +136,25 @@ const Header2 = () => {
                   href="#"
                   class="open-search fables-third-text-color right  top-header-link px-3 px-md-2 px-lg-4 fables-second-hover-color border-0 max-line-height"
                 >
-                  <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+                  <i
+                    class="fa-sharp fa-solid fa-magnifying-glass"
+                    onClick={() => setShowSearch(true)}
+                  ></i>
                 </a>
-                <a
-                  href="/login"
-                  class="fables-third-text-color fables-second-hover-color font-13 top-header-link px-3 px-md-2 px-lg-4 max-line-height"
-                >
-                  <i class="fa-solid fa-user"></i>
-                </a>
+                <Link to={"/login"}>
+                  <a
+                    href="#"
+                    class="fables-third-text-color fables-second-hover-color font-13 top-header-link px-3 px-md-2 px-lg-4 max-line-height"
+                  >
+                    <i class="fa-solid fa-user"></i>
+                  </a>
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </div>
+      {showSearch && <Search setShowSearch={setShowSearch} />}
     </>
   );
 };

@@ -1,11 +1,16 @@
 import React, { useContext, useState } from "react";
-import sml1 from "../images/sml1.jpg";
-import { CartContext } from "../Context/CartContext";
+import { MdClose } from "react-icons/md";
+import AppContext, { Context } from "../Context/CartContext";
+import CartItem from "./CartItem";
+import { BsCartX } from "react-icons/bs";
+import "./Cart.css";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const Cart = useContext(CartContext);
-  console.log(Cart);
+  const Cart = useContext(AppContext);
   const [openCart, showOpenCart] = useState(false);
+  const { cartCount, cartItems, cartSubTotal } = useContext(Context);
+
   return (
     <>
       <div class="dropdown">
@@ -18,9 +23,9 @@ const Cart = () => {
           onClick={() => showOpenCart(!openCart)}
           style={{ cursor: "pointer" }}
         >
-          <i class="fa-solid fa-cart-shopping "></i>
+          <i class="fa-solid fa-cart-shopping " id="cart-icon"></i>
           <span class="fables-cart-number fables-second-background-color text-center">
-            3
+            <span>{cartCount}</span>
           </span>
         </a>
 
@@ -30,70 +35,50 @@ const Cart = () => {
           style={openCart ? { display: "block" } : { display: "none" }}
         >
           <div class="p-3 cart-block">
-            <p class="fables-second-text-color semi-font mb-4 font-17">
-              (2) Items in my cart
-            </p>
-            <div class="row mx-0 mb-3">
-              <div class="col-4 p-0">
-                <a href="#">
-                  <img src={sml1} alt="" class="w-100" />
-                </a>
-              </div>
-              <div class="col-8">
-                <h2>
-                  <a
-                    href="#"
-                    class="fables-main-text-color font-13 d-block fables-main-hover-color"
+            <MdClose
+              style={{
+                gap: "115px",
+                alignItems: "center",
+                cursor: "pointer",
+                marginLeft: 250,
+              }}
+              onClick={() => showOpenCart(false)}
+            />
+            {!cartItems?.length && (
+              <div className="empty-cart">
+                <i class="fas fa-shopping-cart fa-2x"></i>
+                <span>No Products in cart</span>
+                <Link to={"/"}>
+                  <button
+                    className="return-cta"
+                    style={{ background: "#9090e6", cursor: "pointer" }}
                   >
-                    LUIS LEATHER DRIVING
-                  </a>
-                </h2>
-                <p class="fables-second-text-color font-weight-bold">
-                  $ 100.00
-                </p>
-                <p class="fables-forth-text-color">QTY : 1</p>
+                    Return to shop
+                  </button>
+                </Link>
               </div>
-            </div>
-            <div class="row mx-0 mb-3">
-              <div class="col-4 p-0">
-                <a href="#">
-                  <img src={sml1} alt="" class="w-100" />
-                </a>
-              </div>
-              <div class="col-8">
-                <h2>
-                  <a
-                    href="#"
-                    class="fables-main-text-color font-13 d-block fables-main-hover-color"
-                  >
-                    LUIS LEATHER DRIVING
-                  </a>
-                </h2>
-                <p class="fables-second-text-color font-weight-bold">
-                  $ 100.00
-                </p>
-                <p class="fables-forth-text-color">QTY : 1</p>
-              </div>
-            </div>
-            <span class="font-16 semi-font fables-main-text-color">TOTAL</span>
-            <span class="font-14 semi-font fables-second-text-color float-right">
-              $200.00
-            </span>
+            )}
+            <CartItem />
             <hr />
-            <div class="text-center">
-              <a
-                href="/singleproduct"
-                class="fables-second-background-color fables-btn-rounded  text-center white-color py-2 px-3 font-14 bg-hover-transparent border fables-second-border-color fables-second-hover-color"
-              >
-                View my cart
-              </a>
-              <a
-                href="#"
-                class="fables-second-text-color border fables-second-border-color fables-btn-rounded text-center white-color p-2 px-4 font-14 fables-second-hover-background-color"
-              >
-                Checkout
-              </a>
-            </div>
+            {!!cartItems?.length && (
+              <>
+                <span class="font-16 semi-font fables-main-text-color">
+                  Sub_TOTAL
+                </span>
+                <span class="font-14 semi-font fables-second-text-color float-right">
+                  ${cartSubTotal}
+                </span>
+                <hr />
+                <div class="text-center">
+                  <a
+                    href="#"
+                    class="fables-second-text-color border fables-second-border-color fables-btn-rounded text-center white-color p-2 px-4 font-14 fables-second-hover-background-color"
+                  >
+                    Checkout
+                  </a>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
