@@ -13,16 +13,16 @@ function SingleProduct(item) {
 
   const { id } = useParams();
   const [data, setData] = useState({});
+  const getData = async () => {
+    let req = await fetch(
+      `http://localhost:1337/api/products/${id}?populate=*&[filters][id]`
+    );
+    let res = await req.json();
+    setData(res.data);
+  };
   useEffect(() => {
-    const getData = async () => {
-      let req = await fetch(
-        `http://localhost:1337/api/products/${id}?populate=*`
-      );
-      let res = await req.json();
-      setData(res.data);
-    };
     getData();
-  }, []);
+  }, [id]);
   // console.log(active);
   return (
     <>

@@ -9,13 +9,17 @@ import { Link, useNavigate } from "react-router-dom";
 
 function Products(item) {
   const [data, setData] = useState([]);
+  const getData = async (id) => {
+    let url = "http://localhost:1337/api/products?populate=*";
+    if (id) {
+      url = `http://localhost:1337/api/products?populate=*&filters[product_category][id][$eq]=${id}`;
+    }
+    console.log(id);
+    let req = await fetch(url);
+    let res = await req.json();
+    setData(res.data);
+  };
   useEffect(() => {
-    const getData = async () => {
-      let req = await fetch("http://localhost:1337/api/products?populate=*");
-      let res = await req.json();
-      setData(res.data);
-      console.log(res.data);
-    };
     getData();
   }, []);
 
@@ -58,7 +62,7 @@ function Products(item) {
             </div>
             {/* <Filters /> */}
 
-            <ProductCategory />
+            <ProductCategory getProducts={getData} />
             <TopRatedProduct />
           </div>
           <div class="col-12 col-md-8 col-lg-9">

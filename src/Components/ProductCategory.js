@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function ProductCategory() {
+function ProductCategory({ getProducts }) {
   const [data, setData] = useState([]);
   useEffect(() => {
     const getData = async () => {
@@ -19,7 +19,11 @@ function ProductCategory() {
       </h2>
       {data.map((item) => (
         <ul class="nav fables-forth-text-color fables-forth-before fables-store-left-list">
-          <li>
+          <li
+            onClick={() => {
+              getProducts(item.id);
+            }}
+          >
             <a href="#">{item?.attributes?.title}</a>
           </li>
         </ul>
